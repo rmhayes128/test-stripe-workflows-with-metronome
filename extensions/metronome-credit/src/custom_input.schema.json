@@ -1,0 +1,103 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "stripe_invoice_id": {
+      "type": "string",
+      "title": "Stripe invoice ID",
+      "description": "ID of the paid invoice (in_...). Used to build the Metronome uniqueness key."
+    },
+    "stripe_customer_id": {
+      "type": "string",
+      "title": "Stripe customer ID",
+      "description": "ID of the invoice's customer (cus_...)."
+    },
+    "stripe_subscription_id": {
+      "type": "string",
+      "title": "Stripe subscription ID",
+      "description": "ID of the subscription that generated the invoice (sub_...)."
+    },
+    "metronome_customer_id": {
+      "type": "string",
+      "title": "Metronome customer ID",
+      "description": "Customer metadata: metronome_customer_id (UUID)."
+    },
+    "credit_amount": {
+      "type": "string",
+      "title": "Credit amount",
+      "description": "Subscription metadata: metronome_credit_amount. Positive integer in the credit type's units (USD credit types are in cents)."
+    },
+    "credit_type_id": {
+      "type": "string",
+      "title": "Metronome credit type ID",
+      "description": "Subscription metadata: metronome_credit_type_id (UUID)."
+    },
+    "credit_product_id": {
+      "type": "string",
+      "title": "Metronome product ID",
+      "description": "Subscription metadata: metronome_credit_product_id (UUID)."
+    },
+    "credit_priority": {
+      "type": "string",
+      "title": "Credit priority",
+      "description": "Subscription metadata: metronome_credit_priority. Non-negative integer. Defaults to 100."
+    },
+    "credit_access_type": {
+      "type": "string",
+      "title": "Credit access type",
+      "description": "Subscription metadata: metronome_credit_access_type. SPEND or QUANTITY. Defaults to SPEND."
+    },
+    "starting_at": {
+      "type": "string",
+      "title": "Credit starts at",
+      "description": "Start of the paid service period. Unix seconds or RFC 3339."
+    },
+    "ending_before": {
+      "type": "string",
+      "title": "Credit ends before",
+      "description": "End of the paid service period (exclusive). Unix seconds or RFC 3339."
+    },
+    "stripe_livemode": {
+      "type": "string",
+      "title": "Invoice livemode",
+      "description": "Invoice livemode. Must be false for this POC."
+    },
+    "invoice_amount_paid": {
+      "type": "string",
+      "title": "Invoice amount paid",
+      "description": "Invoice amount_paid in the smallest currency unit. Must be greater than 0."
+    },
+    "invoice_currency": {
+      "type": "string",
+      "title": "Invoice currency",
+      "description": "Three-letter ISO currency code of the invoice."
+    },
+    "invoice_billing_reason": {
+      "type": "string",
+      "title": "Invoice billing reason",
+      "description": "Must be subscription_create or subscription_cycle."
+    },
+    "invoice_paid_out_of_band": {
+      "type": "string",
+      "title": "Invoice paid out of band",
+      "description": "true or false. Must be false for a credit to be created."
+    }
+  },
+  "required": [
+    "stripe_invoice_id",
+    "stripe_customer_id",
+    "stripe_subscription_id",
+    "metronome_customer_id",
+    "credit_amount",
+    "credit_type_id",
+    "credit_product_id",
+    "starting_at",
+    "ending_before",
+    "stripe_livemode",
+    "invoice_amount_paid",
+    "invoice_currency",
+    "invoice_billing_reason",
+    "invoice_paid_out_of_band"
+  ],
+  "additionalProperties": false
+}

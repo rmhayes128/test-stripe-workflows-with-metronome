@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["created", "already_exists"],
+      "description": "created when this run created the credit; already_exists when Metronome already had a credit with this uniqueness key."
+    },
+    "metronome_credit_id": {
+      "type": "string",
+      "description": "ID of the created Metronome credit. Empty when status is already_exists."
+    },
+    "uniqueness_key": {
+      "type": "string",
+      "description": "Deterministic Metronome uniqueness key: stripe:invoice.paid:<invoice ID>."
+    },
+    "stripe_invoice_id": {
+      "type": "string",
+      "description": "The Stripe invoice the credit was created for."
+    }
+  }
+}

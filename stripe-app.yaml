@@ -1,0 +1,127 @@
+$schema: https://stripe.com/stripe-app/v2.0.0/schema
+id: com.rhayes.metronome-credit-poc
+name: Metronome Credit POC
+version: 0.0.4
+icon: ""
+declarations:
+    distribution_type: private
+    stripe_api_access:
+        permissions:
+            - permission: workflow_custom_action_run_write
+              purpose: Runs the Create Metronome credit and Metronome sync custom actions and reads data from earlier workflow steps
+            - permission: secret_write
+              purpose: Stores the Metronome sandbox API token used to authenticate outbound Metronome requests
+    sandbox_install_compatible: true
+extensions:
+    - id: metronome-credit
+      name: Create Metronome credit
+      interface_id: extend.workflows.custom_action
+      version: 0.0.4
+      configuration:
+        input_schema:
+            type: json_schema
+            content: extensions/metronome-credit/generated/config.schema.json
+        ui_schema:
+            type: jsonforms
+            content: extensions/metronome-credit/generated/config.ui.json
+      script:
+        type: typescript
+        content: extensions/metronome-credit/src/index.ts
+      permissions: []
+      methods:
+        execute:
+            implementation_type: script
+            custom_input:
+                input_schema:
+                    type: json_schema
+                    content: extensions/metronome-credit/src/custom_input.schema.json
+                ui_schema:
+                    type: jsonforms
+                    content: extensions/metronome-credit/src/custom_input.ui.schema.json
+            custom_output:
+                output_schema:
+                    type: json_schema
+                    content: extensions/metronome-credit/src/custom_output.schema.json
+            errors:
+                - code: invalid_input
+                  message: The action input is missing or invalid. Check the Workflow field mappings and Stripe metadata.
+                  retryable: false
+                - code: metronome_auth_failed
+                  message: Metronome rejected the credentials. Check the metronome_api_token secret.
+                  retryable: false
+                - code: metronome_request_rejected
+                  message: Metronome rejected the credit request. Check the Metronome customer, credit type, and product IDs.
+                  retryable: false
+                - code: metronome_rate_limited
+                  message: Metronome rate limited the request. The action will be retried.
+                  retryable: true
+                - code: metronome_unavailable
+                  message: Metronome was unreachable or returned a server error. The action will be retried.
+                  retryable: true
+        get_form_state:
+            implementation_type: script
+      endpoints:
+        - id: metronome_api
+          type: custom_http
+          test:
+            url: https://api.metronome.com
+            purpose: Create customer credits in the Metronome sandbox when a Stripe subscription invoice is paid
+            auth:
+                type: bearer_token
+                secret_name: metronome_api_token
+    - id: metronome-sync
+      name: Metronome sync
+      interface_id: extend.workflows.custom_action
+      version: 0.0.4
+      configuration:
+        input_schema:
+            type: json_schema
+            content: extensions/metronome-sync/generated/config.schema.json
+        ui_schema:
+            type: jsonforms
+            content: extensions/metronome-sync/generated/config.ui.json
+      script:
+        type: typescript
+        content: extensions/metronome-sync/src/index.ts
+      permissions: []
+      methods:
+        execute:
+            implementation_type: script
+            custom_input:
+                input_schema:
+                    type: json_schema
+                    content: extensions/metronome-sync/src/custom_input.schema.json
+                ui_schema:
+                    type: jsonforms
+                    content: extensions/metronome-sync/src/custom_input.ui.schema.json
+            custom_output:
+                output_schema:
+                    type: json_schema
+                    content: extensions/metronome-sync/src/custom_output.schema.json
+            errors:
+                - code: invalid_input
+                  message: The action input is missing or invalid. Check the Workflow field mappings.
+                  retryable: false
+                - code: metronome_auth_failed
+                  message: Metronome rejected the credentials. Check the metronome_api_token secret.
+                  retryable: false
+                - code: metronome_request_rejected
+                  message: Metronome rejected the request. Check the package aliases, product ID, and customer.
+                  retryable: false
+                - code: metronome_rate_limited
+                  message: Metronome rate limited the request. The action will be retried.
+                  retryable: true
+                - code: metronome_unavailable
+                  message: Metronome was unreachable or returned a server error. The action will be retried.
+                  retryable: true
+        get_form_state:
+            implementation_type: script
+      endpoints:
+        - id: metronome_sync_api
+          type: custom_http
+          test:
+            url: https://api.metronome.com
+            purpose: Create customers, contracts, and contract credits in the Metronome sandbox from Stripe subscription events
+            auth:
+                type: bearer_token
+                secret_name: metronome_api_token

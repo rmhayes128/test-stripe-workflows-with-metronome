@@ -1,0 +1,85 @@
+{
+  "type": "VerticalLayout",
+  "elements": [
+    {
+      "type": "Control",
+      "scope": "#/properties/stripe_invoice_id",
+      "options": { "template": true }
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/stripe_customer_id",
+      "options": { "template": true }
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/stripe_subscription_id",
+      "options": { "template": true }
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/metronome_customer_id",
+      "options": { "template": true }
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/credit_amount",
+      "options": { "template": true }
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/credit_type_id",
+      "options": { "template": true }
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/credit_product_id",
+      "options": { "template": true }
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/credit_priority",
+      "options": { "template": true }
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/credit_access_type",
+      "options": { "template": true }
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/starting_at",
+      "options": { "template": true }
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/ending_before",
+      "options": { "template": true }
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/stripe_livemode",
+      "options": { "template": true }
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/invoice_amount_paid",
+      "options": { "template": true }
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/invoice_currency",
+      "options": { "template": true }
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/invoice_billing_reason",
+      "options": { "template": true }
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/invoice_paid_out_of_band",
+      "options": { "template": true }
+    }
+  ]
+}

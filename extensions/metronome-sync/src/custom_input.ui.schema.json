@@ -1,0 +1,71 @@
+{
+  "type": "VerticalLayout",
+  "elements": [
+    { "type": "Control", "scope": "#/properties/operation" },
+    {
+      "type": "Control",
+      "scope": "#/properties/stripe_customer_id",
+      "options": { "template": true }
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/customer_name",
+      "options": { "template": true }
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/stripe_subscription_id",
+      "options": { "template": true }
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/stripe_price_id",
+      "options": { "template": true }
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/subscription_start",
+      "options": { "template": true }
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/stripe_invoice_id",
+      "options": { "template": true }
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/invoice_billing_reason",
+      "options": { "template": true }
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/invoice_amount_paid",
+      "options": { "template": true }
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/period_start",
+      "options": { "template": true }
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/period_end",
+      "options": { "template": true }
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/credit_product_id",
+      "options": { "template": true }
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/credit_type_id",
+      "options": { "template": true }
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/stripe_livemode",
+      "options": { "template": true }
+    }
+  ]
+}

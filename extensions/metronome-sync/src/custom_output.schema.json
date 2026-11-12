@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "title": "Metronome sync result",
+  "properties": {
+    "status": {
+      "type": "string",
+      "title": "Status",
+      "description": "Customer: created/existing. Contract: created/transitioned/unchanged. Credit: created/already_exists/skipped."
+    },
+    "metronome_customer_id": { "type": "string", "title": "Metronome customer ID" },
+    "metronome_contract_id": {
+      "type": "string",
+      "title": "Metronome contract ID",
+      "description": "The contract active for this subscription period."
+    },
+    "metronome_credit_id": { "type": "string", "title": "Metronome credit ID" },
+    "credit_amount": {
+      "type": "string",
+      "title": "Credit amount (cents)",
+      "description": "Amount paid plus any carryover."
+    },
+    "carryover_amount": {
+      "type": "string",
+      "title": "Carryover amount (cents)",
+      "description": "Unused credit carried over from the previous plan on an upgrade."
+    },
+    "detail": { "type": "string", "title": "Detail" }
+  },
+  "required": [
+    "status",
+    "metronome_customer_id",
+    "metronome_contract_id",
+    "metronome_credit_id",
+    "credit_amount",
+    "carryover_amount",
+    "detail"
+  ],
+  "additionalProperties": false
+}

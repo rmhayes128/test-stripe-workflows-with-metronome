@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "title": "Metronome sync",
+  "properties": {
+    "operation": {
+      "type": "string",
+      "title": "Operation",
+      "description": "sync_customer (customer.created), sync_contract (customer.subscription.created), or credit_invoice (invoice.paid).",
+      "enum": ["sync_customer", "sync_contract", "credit_invoice"]
+    },
+    "stripe_customer_id": {
+      "type": "string",
+      "title": "Stripe customer ID",
+      "description": "All operations. cus_..."
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer name",
+      "description": "sync_customer, optional. Name for the new Metronome customer."
+    },
+    "stripe_subscription_id": {
+      "type": "string",
+      "title": "Stripe subscription ID",
+      "description": "sync_contract and credit_invoice. sub_..."
+    },
+    "stripe_price_id": {
+      "type": "string",
+      "title": "Stripe price ID",
+      "description": "sync_contract and credit_invoice. The subscription's current price; the Metronome package with this alias is used."
+    },
+    "subscription_start": {
+      "type": "string",
+      "title": "Subscription start",
+      "description": "sync_contract. Subscription start date (Unix seconds or RFC 3339)."
+    },
+    "stripe_invoice_id": {
+      "type": "string",
+      "title": "Stripe invoice ID",
+      "description": "credit_invoice. in_..."
+    },
+    "invoice_billing_reason": {
+      "type": "string",
+      "title": "Invoice billing reason",
+      "description": "credit_invoice. subscription_create, subscription_cycle, or subscription_update."
+    },
+    "invoice_amount_paid": {
+      "type": "string",
+      "title": "Invoice amount paid (cents)",
+      "description": "credit_invoice. Becomes the credit amount, e.g. 2000 for $20."
+    },
+    "period_start": {
+      "type": "string",
+      "title": "Service period start",
+      "description": "credit_invoice. The first line item's period start (Unix seconds or RFC 3339)."
+    },
+    "period_end": {
+      "type": "string",
+      "title": "Service period end",
+      "description": "credit_invoice. The first line item's period end (Unix seconds or RFC 3339)."
+    },
+    "credit_product_id": {
+      "type": "string",
+      "title": "Metronome credit product ID",
+      "description": "credit_invoice. UUID of a FIXED Metronome product, e.g. Prepaid Credits."
+    },
+    "credit_type_id": {
+      "type": "string",
+      "title": "Metronome credit type ID",
+      "description": "credit_invoice, optional. Defaults to USD (cents)."
+    },
+    "stripe_livemode": {
+      "type": "string",
+      "title": "Stripe livemode",
+      "description": "Optional. Live mode is rejected."
+    }
+  },
+  "required": ["operation", "stripe_customer_id"],
+  "additionalProperties": false
+}
